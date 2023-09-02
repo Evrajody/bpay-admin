@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Pay | Message</title>
+
+    <!-- Inclusion du la police inter & roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Inclusion des fichiers css -->
+    <link rel="stylesheet" href="../../assets/css/output.tailwindcss.css">
+
+    <!-- Aos -->
+    <link rel="stylesheet" href="../../assets/css/aos.css">
+    <script src="../../assets/js/aos.js"></script>
+
+    <!-- Inclusion des fichiers jquery -->
+    <script src="../../assets/js/jquery-3.6.0.js"></script>
+
+    <!-- Inclusion des fichiers jquery -->
+    <script src="../../assets/js/sweetalert2.all.min.js"></script>
+
+    <!-- Fichier js  de Flowbite -->
+    <script type="text/javascript" src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
+
+    <!-- Fichier css & js de dropzone -->
+    <link rel="stylesheet" href="../../assets/css/dropzone.min.css">
+    <script src="../../assets/js/dropzone.min.js"></script>
+
+    <!-- Fichier css & js de simple-datatable -->
+    <link rel="stylesheet" href="../../assets/css/simple-datatables.style.css">
+    <script src="../../assets/js/simple-datatables.js"></script>
+
+    <!-- css place -->
+    <style>
+        @keyframes slideInLeft {
+            0% {
+                transform: translateY(-5%);
+            }
+
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+        .animate-fade-in {
+        animation: slideInLeft 0.5s linear; /* Vous pouvez ajuster la durée de l'animation ici */
+        }
+    </style>
+</head>
+
+<body class="w-full bg-bpay-grisBg">
+
+    <!-- Sidebar -->
+    <nav id="" class="sidebar w-[70%] md:w-[35%] lg:w-[20%] h-screen bg-bpay-bleuFonce z-40 dark:bg-bpay-blueDark fixed left-0 top-0 text-white !overflow-x-hidden overflow-y-auto">
+        <div>
+            <div class="flex justify-between items-center p-4 h-[73px]" data-aos="zoom-out" data-aos-easing="linear" data-aos-duration="1000">
+                <div class="flex items-center space-x-2">
+                    <img src="../../assets/images/img-logo.png" alt="Logo" class="h-[40px] txt">
+                    <h4 class="text-xl font-Philosopher font-bold txt">Invest in B-PAY</h4>
+                </div>
+                <div id="toggleSidebar">
+                    <svg id="btnReduction" class="h-8 w-8 p-1 rounded-default hover:bg-gray-200 hover:text-bpay-bleuFonce toggle-btn" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="overflow: visible;">
+                        <path d="M328 112 184 256l144 144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48px"></path>
+                    </svg>
+                    <svg id="btnAgrandir" class="h-8 w-8 p-1 hidden rounded-default hover:bg-gray-200 hover:text-bpay-bleuFonce toggle-btn" stroke-width="2" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="overflow: visible;">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="h-[0.05em] w-full bg-bpay-grisBg"></div>
+            <div id="survol" class="py-2  font-Poppins space-y-5">
+                <ul id="ctnLien" class="flex flex-col space-y-2 pr-10 overflow-hidden">
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/dashbord/index.html" class="flex items-center space-x-3 link">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="overflow: visible;">
+                                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
+                            </svg>
+                            <span class="text-xs txt">Tableau de bord</span> <span class="hidden link-text hover:block">Dashbord</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/graphique/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="overflow: visible;">
+                                <path d="M864 518H506V160c0-4.4-3.6-8-8-8h-26a398.46 398.46 0 0 0-282.8 117.1 398.19 398.19 0 0 0-85.7 127.1A397.61 397.61 0 0 0 72 552a398.46 398.46 0 0 0 117.1 282.8c36.7 36.7 79.5 65.6 127.1 85.7A397.61 397.61 0 0 0 472 952a398.46 398.46 0 0 0 282.8-117.1c36.7-36.7 65.6-79.5 85.7-127.1A397.61 397.61 0 0 0 872 552v-26c0-4.4-3.6-8-8-8zM705.7 787.8A331.59 331.59 0 0 1 470.4 884c-88.1-.4-170.9-34.9-233.2-97.2C174.5 724.1 140 640.7 140 552c0-88.7 34.5-172.1 97.2-234.8 54.6-54.6 124.9-87.9 200.8-95.5V586h364.3c-7.7 76.3-41.3 147-96.6 201.8zM952 462.4l-2.6-28.2c-8.5-92.1-49.4-179-115.2-244.6A399.4 399.4 0 0 0 589 74.6L560.7 72c-4.7-.4-8.7 3.2-8.7 7.9V464c0 4.4 3.6 8 8 8l384-1c4.7 0 8.4-4 8-8.6zm-332.2-58.2V147.6a332.24 332.24 0 0 1 166.4 89.8c45.7 45.6 77 103.6 90 166.1l-256.4.7z"></path>
+                            </svg>
+                            <span class="text-xs txt">Graphiques</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/action/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="overflow: visible;">
+                                <path fill-rule="evenodd" d="M14 5v1H2V5h12zM2 7h12v5H2V7zm12-3H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-3 6h2v1h-2v-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-xs txt">Achats d'actions</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/parrainnage/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="overflow: visible;">
+                                <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"></path>
+                            </svg>
+                            <span class="text-xs txt">Les Parainés</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire  text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/historique/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="overflow: visible;">
+                                <path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
+                            </svg>
+                            <span class="text-xs txt">Historique</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/message/index.html" class="flex items-center space-x-3">
+                            <div class="relative">
+                                <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="overflow: visible;">
+                                    <path d="M160 368c26.5 0 48 21.5 48 48v16l72.5-54.4c8.3-6.2 18.4-9.6 28.8-9.6H448c8.8 0 16-7.2 16-16V64c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h96zm48 124-.2.2-5.1 3.8-17.1 12.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3v-80H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h384c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H309.3L208 492z"></path>
+                                </svg>
+                                <span class="w-4 h-4 rounded-full bg-bpay-violet text-[8px] p-2 font-bold absolute top-0 left-0 flex flex-col justify-center items-center translate-x-2 -translate-y-2">12</span>
+                            </div>
+                            <span class="text-xs txt">Chat et Messages</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/profil/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="overflow: visible;">
+                                <path d="M858.5 763.6a374 374 0 0 0-80.6-119.5 375.63 375.63 0 0 0-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 0 0-80.6 119.5A371.7 371.7 0 0 0 136 901.8a8 8 0 0 0 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 0 0 8-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path>
+                            </svg>
+                            <span class="text-xs txt">Profil d'utilisateur</span>
+                        </a>
+                    </li>
+
+                    <li class="hover:bg-bpay-bleuClaire text-white pl-6 py-2 rounded-r-lg">
+                        <a href="../../pages/detail/index.html" class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 fill-current" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="overflow: visible;">
+                                <path d="m434.8 137.65-149.36-68.1c-16.19-7.4-42.69-7.4-58.88 0L77.3 137.65c-17.6 8-17.6 21.09 0 29.09l148 67.5c16.89 7.7 44.69 7.7 61.58 0l148-67.5c17.52-8 17.52-21.1-.08-29.09ZM160 308.52l-82.7 37.11c-17.6 8-17.6 21.1 0 29.1l148 67.5c16.89 7.69 44.69 7.69 61.58 0l148-67.5c17.6-8 17.6-21.1 0-29.1l-79.94-38.47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32px"></path>
+                                <path d="m160 204.48-82.8 37.16c-17.6 8-17.6 21.1 0 29.1l148 67.49c16.89 7.7 44.69 7.7 61.58 0l148-67.49c17.7-8 17.7-21.1.1-29.1L352 204.48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32px"></path>
+                            </svg>
+                            <span class="text-xs txt">Projet détaillé</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="text-xs flex flex-col justify-center items-center">
+                    <span class="font-bold txt">PDF Report d'actionnariat</span>
+                    <span class="text-bpay-gris1 txt">Télécharger votre certificat</span>
+                    <span class="txt">
+                        <a href="" class="flex space-x-3 mt-2 items-center text-white bg-bpay-bleuClaire2/50 px-6 py-2 rounded-default font-bold  text-xs">
+                            <span>Télécharger</span>
+                            <svg class="w-5 h-5 fill-current" stroke-width="2" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="overflow: visible;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
+                            </svg>
+                        </a>
+                    </span>
+                    <div class="self-start mt-2">
+                        <button class="flex items-center space-x-3 hover:bg-bpay-rouge text-white pl-6 pr-10 font-bold py-2 rounded-r-lg">
+                            <svg class="w-5 h-5 fill-current" stroke-width="2" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="overflow: visible;">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+                            </svg>
+                            <span class="text-xs txt">Se déconnecter</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-[0.05em] w-full bg-bpay-grisBg mb-4"></div>
+            <div class="flex flex-col justify-center text-xs py-4 px-4 font-Poppins">
+                <div class="flex justify-between items-center">
+                    <span class="font-bold text-xs txt">Dark Mode</span>
+                    <button id="theme-toggle" type="button" class="text-white dark:text-white border-[1px]  focus:outline-none rounded-lg text-sm p-2.5">
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- top-page -->
+    <div class="!z-40">
+        <div class="font-Poppins text-bpay-gris1 py-[17px] bg-white shadow-xs">
+            <div class="pl-[18%] md:pl-[13%] lg:pl-[22%] pr-[3%] lg:pr-[2%] transition-all duration-1000 ease-linear w-full content">
+                <div class="flex justify-end md:justify-between items-center">
+                    <div class="font-bold text-base text-bpay-gris4 hidden md:block">
+                        <div class="font-bold text-base  text-bpay-gris4 hidden md:block">
+                            <div class="flex flex-col">
+                                <span class="font-bold font-Poppins">Chat & Message</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end  items-center space-x-5 " data-aos="fade-right" data-aos-easing="linear" data-aos-duration="1000">
+                        <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block" type="button">
+                            <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="2rem" width="2rem" style="overflow: visible;">
+                                <path d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64Z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32px"></path>
+                                <path d="M338.29 338.29 448 448" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32px"></path>
+                            </svg>
+                        </button>
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown1" class="text-bpay-gris1 relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.9rem" height="1.9rem" viewBox="0 0 36 36">
+                                <path fill="currentColor" d="M32.51 27.83A14.4 14.4 0 0 1 30 24.9a12.63 12.63 0 0 1-1.35-4.81v-4.94A10.81 10.81 0 0 0 19.21 4.4V3.11a1.33 1.33 0 1 0-2.67 0v1.31a10.81 10.81 0 0 0-9.33 10.73v4.94a12.63 12.63 0 0 1-1.35 4.81a14.4 14.4 0 0 1-2.47 2.93a1 1 0 0 0-.34.75v1.36a1 1 0 0 0 1 1h27.8a1 1 0 0 0 1-1v-1.36a1 1 0 0 0-.34-.75ZM5.13 28.94a16.17 16.17 0 0 0 2.44-3a14.24 14.24 0 0 0 1.65-5.85v-4.94a8.74 8.74 0 1 1 17.47 0v4.94a14.24 14.24 0 0 0 1.65 5.85a16.17 16.17 0 0 0 2.44 3Z" class="clr-i-outline clr-i-outline-path-1" />
+                                <path fill="currentColor" d="M18 34.28A2.67 2.67 0 0 0 20.58 32h-5.26A2.67 2.67 0 0 0 18 34.28Z" class="clr-i-outline clr-i-outline-path-2" />
+                                <path fill="none" d="M0 0h36v36H0z" /></svg>
+                            <span class="w-4 h-4 bg-bpay-violet rounded-full text-white text-[8px] font-bold absolute top-0 right-0 translate-x-[3px] -translate-y-[2px] flex flex-col justify-center items-center">12</span>
+                        </button>
+                        <div class="flex items-center cursor-pointer space-x-2" id="logoutButton" data-dropdown-toggle="dropdown2">
+                            <img src="../../assets/images/user2.webp" alt="" class="w-10 h-10 rounded-full object-cover object-center">
+                            <span class="text-xs text-bpay-gris4 font-bold flex flex-col"><span>Mark</span> <span>Mufotino</span></span>
+                            <!-- <svg fill="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="overflow: visible;" height="0.8em" width="0.8em">
+                            <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                        </svg> -->
+                            <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="overflow: visible;" height="1.5em" width="1.5em">
+                                <path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- notification content -->
+    <div id="dropdown1" class="hidden z-10 !mt-3 bg-gray-50 rounded-b-md max-h-[98vh] overflow-y-auto lg:w-[20%] font-Poppins">
+        <ul class="space-y-2 ">
+            <li>
+                <a href="" class="flex items-stretch py-1 text-base space-x-2 px-2">
+                    <svg fill="none" class="p-1 bg-purple-200 rounded-full" stroke-width="0" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 24 24" height="2em" width="2em" style="overflow: visible;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"></path>
+                    </svg>
+                    <div class="w-full overflow-x-hidden self-center">
+                        <p class="text-xs font-medium ">
+                            Vous avez une nouvelle demande
+                        </p>
+                        <div class="text-bpay-gris4 text-xs">
+                            Just now
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="" class="flex items-stretch py-1 text-base space-x-2 px-2">
+                    <svg fill="none" class="p-1 bg-purple-200 rounded-full" stroke-width="0" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 24 24" height="2em" width="2em" style="overflow: visible;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"></path>
+                    </svg>
+                    <div class="w-full overflow-x-hidden self-center">
+                        <p class="text-xs font-medium ">
+                            Vous avez une nouvelle demande
+                        </p>
+                        <div class="text-bpay-gris4 text-xs">
+                            Just now
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="" class="flex items-stretch py-1 text-base space-x-2 px-2">
+                    <svg fill="none" class="p-1 bg-purple-200 rounded-full" stroke-width="0" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 24 24" height="2em" width="2em" style="overflow: visible;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"></path>
+                    </svg>
+                    <div class="w-full overflow-x-hidden self-center">
+                        <p class="text-xs font-medium ">
+                            Vous avez une nouvelle demande
+                        </p>
+                        <div class="text-bpay-gris4 text-xs">
+                            Just now
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Logout menu -->
+    <div id="dropdown2" class="hidden z-10 !mt-2 bg-gray-50 rounded-b-md overflow-y-auto w-[200px] font-Poppins py-2">
+        <ul class="space-y-2 ">
+            <li>
+                <a href="../../pages/profil/index.html" class="block px-4 py-2 hover:bg-bpay-bleuClaire hover:text-white mx-2 rounded-default font-medium text-xs">Mon profil</a>
+            </li>
+            <li>
+                <a href="" class="px-4 py-2 hover:bg-bpay-bleuClaire hover:text-white mx-2 rounded-default font-medium text-xs flex justify-between">
+                    <span>Se Deconnecter</span>
+                    <span>
+                        <svg fill="none" class="w-5 h-5 fill-current" stroke-width="2" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="overflow: visible;">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+                        </svg>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Modal de recherche -->
+    <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed animate-fade-in transition-all duration-1000 ease-linear p-4 top-[90px] z-50 hidden w-full overflow-x-hidden overflow-y-auto max-h-full">
+        <div class="relative w-full font-Roboto pl-[18%] md:pl-[13%] lg:pl-[22%] pr-[3%] lg:pr-[2%] ease-linear content">
+            <!-- Modal content -->
+            <div class="relative bg-bpay-grisBg rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-start justify-between p-4 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-bpay-gris4">
+                        Que recherchez-vous ?
+                    </h3>
+                    <button type="button" class="bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="defaultModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form action="" class="py-2 px-4">
+                    <div class="">
+                        <input type="search" name="" id="" class="w-full focus:ring-0 focus:border-none outline-none px-3 py-3 rounded-lg border-none">
+                    </div>
+                    <button type="submit" class="bg-bpay-bleuClaire  rounded-default text-sm font-bold px-4 py-2 mt-6 mb-4 text-white">
+                        Rechercher
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="font-Roboto pl-[18%] md:pl-[13%] lg:pl-[22%] pr-[3%] lg:pr-[2%] ease-linear w-full content  lg:h-[92vh] overflow-hidden">
+        <div class="flex flex-col lg:flex-row justify-between gap-8 py-5">
+            <!-- Incons -->
+            <div class="flex flex-row lg:flex-col justify-between lg:justify-center lg:space-y-8 items-center lg:h-[80vh] p-5">
+                <div class="bg-gray-50 p-2 hover:text-bpay-bleuFonce text-bpay-bleuClaire rounded-full">
+                    <svg fill="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="1.8em" width="1.8em" style="overflow: visible;">
+                        <path fill-rule="evenodd" d="m8.36 1.37 6.36 5.8-.71.71L13 6.964v6.526l-.5.5h-3l-.5-.5v-3.5H7v3.5l-.5.5h-3l-.5-.5V6.972L2 7.88l-.71-.71 6.35-5.8h.72zM4 6.063v6.927h2v-3.5l.5-.5h3l.5.5v3.5h2V6.057L8 2.43 4 6.063z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="bg-gray-50 p-2 hover:text-bpay-bleuFonce text-bpay-bleuClaire rounded-full">
+                    <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="1.8em" width="1.8em" style="overflow: visible;">
+                        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+                        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"></path>
+                    </svg>
+                </div>
+                <div class="bg-gray-50 p-2 hover:text-bpay-bleuFonce text-bpay-bleuClaire rounded-full">
+                    <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1.8em" width="1.8em" style="overflow: visible;">
+                        <path d="M427.68 351.43C402 320 383.87 304 383.87 217.35 383.87 138 343.35 109.73 310 96c-4.43-1.82-8.6-6-9.95-10.55C294.2 65.54 277.8 48 256 48s-38.21 17.55-44 37.47c-1.35 4.6-5.52 8.71-9.95 10.53-33.39 13.75-73.87 41.92-73.87 121.35C128.13 304 110 320 84.32 351.43 73.68 364.45 83 384 101.61 384h308.88c18.51 0 27.77-19.61 17.19-32.57ZM320 384v16a64 64 0 0 1-128 0v-16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32px"></path>
+                    </svg>
+                </div>
+                <div class="bg-gray-50 p-2 hover:text-bpay-bleuFonce text-bpay-bleuClaire rounded-full">
+                    <svg fill="none" stroke-width="2" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" height="1.8em" width="1.8em" style="overflow: visible;">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </div>
+                <div class="bg-gray-50 p-2 hover:text-bpay-bleuFonce text-bpay-bleuClaire rounded-full">
+                    <svg fill="none" stroke-width="2" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="1.8em" height="1.8em" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="overflow: visible;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                        <path d="M9 12h12l-3 -3"></path>
+                        <path d="M18 15l3 -3"></path>
+                    </svg>
+                </div>
+            </div>
+
+
+            <div class="flex flex-col lg:flex-row !justify-between gap-5 w-full">
+                <!-- Liste discussion -->
+                <div class="lg:w-2/5 space-y-6">
+
+                    <!-- Barre de recherche -->
+                    <div class="w-full">
+                        <form action="" class="w-full">
+                            <div class="relative">
+                                <input type="search" name="" id="" placeholder="Search" class="w-full shadow-default bg-white rounded-lg text-bpay-gris1 pl-10 focus:ring-0 py-3 border-none outline-none focus:outline-none">
+                                <svg fill="currentColor" class="absolute top-0 left-0 translate-y-3 translate-x-3 text-bpay-gris1" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1.5em" width="1.5em" style="overflow: visible;">
+                                    <path d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64Z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32px"></path>
+                                    <path d="M338.29 338.29 448 448" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32px"></path>
+                                </svg>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Les parainés -->
+                    <div class="bg-white p-3 rounded-xl ">
+                        <h2 class="text-bpay-gris4 font-bold mb-2">Les parainés</h2>
+                        <div class="h-[25vh] overflow-y-auto divide-y-[1px] divide-bpay-gris1 flex flex-col justify-center">
+                            <div class="py-2 px-1 cursor-pointer hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Friends Forever</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <span class="rounded-full text-white text-[8px] w-4 h-4 flex justify-center items-center font-bold bg-bpay-orange">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-1 cursor-pointer hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Max Gang</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <span class="rounded-full text-white text-[8px] w-4 h-4 flex justify-center items-center font-bold bg-bpay-orange">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-1 cursor-pointer  hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Codjo Naija</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <!-- <span class="rounded-full text-white text-[8px] w-4 h-4 flex justify-center items-center font-bold bg-bpay-orange">4</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Client -->
+                    <div class="bg-white p-3 rounded-xl ">
+                        <h2 class="text-bpay-gris4 font-bold mb-2">Support clients</h2>
+                        <div class="h-[25vh] overflow-y-auto divide-y-[1px] divide-bpay-gris1 flex flex-col justify-center">
+                            <div class="py-2 px-1 cursor-pointer hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Friends Forever</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <span class="rounded-full text-bpay-violet text-[8px] w-4 h-4 flex justify-center items-center font-bold">
+                                            <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="2em" width="2em" style="overflow: visible;">
+                                                <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-1 cursor-pointer hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Max Gang</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <span class="rounded-full text-white text-[8px] w-4 h-4 flex justify-center items-center font-bold bg-bpay-orange">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-1 cursor-pointer  hover:rounded-lg hover:bg-bpay-gris2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="../../assets/images/img-profile.jpg" alt="" class="w-10 h-10 rounded-full">
+                                        <div class="text-xs text-bpay-gris4 flex flex-col">
+                                            <span class="font-bold text-bpay-gris4">Codjo Naija</span>
+                                            <span class="font-normal text-bpay-gris1">Hahahahaha !</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="text-xs font-light text-bpay-gris1">Today, 9.52pm</span>
+                                        <!-- <span class="rounded-full text-white text-[8px] w-4 h-4 flex justify-center items-center font-bold bg-bpay-orange">4</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discussion -->
+                <div class="lg:w-3/5">
+                    <div class="w-full bg-white rounded-xl p-3">
+                        <div class="py-2">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-4">
+                                    <img src="../../assets/images/img-profile.jpg" alt="" class="w-12 cursor-pointer h-12 rounded-full object-cover object-top">
+                                    <div class="text-xs text-bpay-gris4 flex flex-col">
+                                        <span class="font-bold text-lg text-bpay-gris4">Friends Forever</span>
+                                        <span class="font-light text-sm text-bpay-gris1">Online-Last seen, 2.02pm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full bg-bpay-gris1 h-[1px] mt-2"></div>
+
+                            <!-- Place Messages -->
+                            <div class="py-5 px-3 h-[58vh] overflow-y-auto space-y-1">
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-start">
+                                        <div class="bg-bpay-gris2 text-xs pl-4 pr-4 text-bpay-noir2 py-2 rounded-2xl font-light break-words">Hey There!</div>
+                                        <div class="bg-bpay-gris2 flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pl-5 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+
+                                    <div class=""></div>
+                                    <!-- Receive -->
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-start">
+                                        <div class="bg-bpay-gris2 text-xs pl-4 pr-4 text-bpay-noir2 py-2 rounded-2xl font-light break-words">How are you?</div>
+                                        <div class="bg-bpay-gris2 flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pl-5 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+
+                                    <div class=""></div>
+                                    <!-- Receive -->
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class=""></div>
+
+                                    <!-- Receive -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-end">
+                                        <div class="bg-bpay-bleuClaire text-xs pl-4 pr-4 text-white py-2 rounded-2xl font-light">Hello !</div>
+                                        <div class="bg-bpay-bleuClaire flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pr-4 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class=""></div>
+
+                                    <!-- Receive -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-end">
+                                        <div class="bg-bpay-bleuClaire text-xs pl-4 pr-4 text-white py-2 rounded-2xl font-light">I am fine and how are you?</div>
+                                        <div class="bg-bpay-bleuClaire flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pr-4 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-start">
+                                        <div class="bg-bpay-gris2 text-xs pl-4 pr-4 text-bpay-noir2 py-2 rounded-2xl font-light break-words">I am doing well, Can we meet tomorrow?</div>
+                                        <div class="bg-bpay-gris2 flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pl-5 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+
+                                    <div class=""></div>
+                                    <!-- Receive -->
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <!-- Send -->
+                                    <div class=""></div>
+
+                                    <!-- Receive -->
+                                    <div class="max-w-[75%] flex flex-col justify-end items-end">
+                                        <div class="bg-bpay-bleuClaire text-xs pl-4 pr-4 text-white py-2 rounded-2xl font-light">Yes Sure!</div>
+                                        <div class="bg-bpay-bleuClaire flex justify-center items-center p-1 rounded-full"></div>
+                                        <div class="text-xs text-bpay-gris1 pr-4 font-light -translate-y-1">Today, 8.33pm</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <form action="" class="w-full">
+                                <div class="flex justify-between items-center w-full space-x-2">
+                                    <div class="relative w-full">
+                                        <input type="text" name="" id="" placeholder="Search" class="w-full bg-bpay-grisBg/50 rounded-lg text-bpay-gris1 pl-10 focus:ring-0 py-3 border-none outline-none focus:outline-none">
+                                        <button class="absolute top-0 left-0 translate-y-3 translate-x-3 text-bpay-gris4">
+                                            <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1.5em" width="1.5em" style="overflow: visible;">
+                                                <path d="M779.3 196.6c-94.2-94.2-247.6-94.2-341.7 0l-261 260.8c-1.7 1.7-2.6 4-2.6 6.4s.9 4.7 2.6 6.4l36.9 36.9a9 9 0 0 0 12.7 0l261-260.8c32.4-32.4 75.5-50.2 121.3-50.2s88.9 17.8 121.2 50.2c32.4 32.4 50.2 75.5 50.2 121.2 0 45.8-17.8 88.8-50.2 121.2l-266 265.9-43.1 43.1c-40.3 40.3-105.8 40.3-146.1 0-19.5-19.5-30.2-45.4-30.2-73s10.7-53.5 30.2-73l263.9-263.8c6.7-6.6 15.5-10.3 24.9-10.3h.1c9.4 0 18.1 3.7 24.7 10.3 6.7 6.7 10.3 15.5 10.3 24.9 0 9.3-3.7 18.1-10.3 24.7L372.4 653c-1.7 1.7-2.6 4-2.6 6.4s.9 4.7 2.6 6.4l36.9 36.9a9 9 0 0 0 12.7 0l215.6-215.6c19.9-19.9 30.8-46.3 30.8-74.4s-11-54.6-30.8-74.4c-41.1-41.1-107.9-41-149 0L463 364 224.8 602.1A172.22 172.22 0 0 0 174 724.8c0 46.3 18.1 89.8 50.8 122.5 33.9 33.8 78.3 50.7 122.7 50.7 44.4 0 88.8-16.9 122.6-50.7l309.2-309C824.8 492.7 850 432 850 367.5c.1-64.6-25.1-125.3-70.7-170.9z"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="flex space-x-3 items-center absolute top-0 right-0 translate-y-3 -translate-x-3 text-bpay-gris4">
+                                            <button>
+                                                <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="1.5em" width="1.5em" style="overflow: visible;">
+                                                    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
+                                                    <circle cx="8.5" cy="10.5" r="1.5"></circle>
+                                                    <circle cx="15.493" cy="10.493" r="1.493"></circle>
+                                                    <path d="M12 18c4 0 5-4 5-4H7s1 4 5 4z"></path>
+                                                </svg>
+                                            </button>
+                                            <button>
+                                                <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1.5em" width="1.5em" style="overflow: visible;">
+                                                    <path d="M864 248H728l-32.4-90.8a32.07 32.07 0 0 0-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 248H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V328c0-44.2-35.8-80-80-80zm8 536c0 4.4-3.6 8-8 8H160c-4.4 0-8-3.6-8-8V328c0-4.4 3.6-8 8-8h186.7l17.1-47.8 22.9-64.2h250.5l22.9 64.2 17.1 47.8H864c4.4 0 8 3.6 8 8v456zM512 384c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160-71.6-160-160-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center items-center">
+                                        <button class="bg-bpay-bleuClaire text-white p-2 rounded-md">
+                                            <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1.5em" width="1.5em" style="overflow: visible;">
+                                                <path d="M842 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1zM512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm-94-392c0-50.6 41.9-92 94-92s94 41.4 94 92v224c0 50.6-41.9 92-94 92s-94-41.4-94-92V232z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Initialisation de AOS js-->
+    <script>
+        AOS.init();
+    </script>
+
+    <script src="../../assets/js/darkMode.js"></script>
+
+    <!-- Script pour affichage du menu pour les mobiles -->
+    <script>
+        $(document).ready(function () {
+            $("#btnReduction").click(function () {
+                var screenWidth = $(window).width();
+                $(".txt").toggle();
+                if (screenWidth < 768) {
+                    $(".sidebar").toggleClass("w-[15%] w-[70%]");
+                    // $(".sidebar").toggleClass("w-[15%] w-[70%]").animate({ width: "15%" }, 1000);
+                } else if (screenWidth < 1080) {
+                    // $(".sidebar").toggleClass("md:w-[10%] md:w-[35%]").animate({ width: "10%" }, 1000);
+                    $(".sidebar").toggleClass("md:w-[10%] md:w-[35%]");
+                } else {
+                    // $(".sidebar").toggleClass("lg:w-[5%] lg:w-[20%]").animate({ width: "5%" }, 1000);
+                    $(".sidebar").toggleClass("lg:w-[5%] lg:w-[20%]");
+                }
+                $("#ctnLien").toggleClass('space-y-2 space-y-6');
+                $(".content").toggleClass("lg:pl-[7%] lg:pl-[22%]");
+                //  $("#survol").hover(
+                //     function () {
+                //         $(".sidebar").toggleClass("md:w-[20%] md:w-[5%]").animate({ width: "5%" }, 1000);
+                //         $(".txt").show();
+                //     }, function() {
+                //         $(".sidebar").toggleClass("md:w-[5%] md:w-[20%]").animate({ width: "20%" }, 1000);
+                //         $(".txt").hide();
+                //     }
+                //  )
+
+                $(".toggle-btn").toggle(); // Bascule entre les boutons
+            });
+
+            $("#btnAgrandir").click(function () {
+                var screenWidth = $(window).width();
+                $(".txt").toggle();
+                if (screenWidth < 768) {
+                    $(".sidebar").toggleClass("w-[70%] w-[15%]");
+                    // $(".sidebar").toggleClass("w-[70%] w-[15%]").animate({ width: "75%" }, 1000);
+                } else if (screenWidth < 1080) {
+                    $(".sidebar").toggleClass("md:w-[35%] md:w-[10%]");
+                    // $(".sidebar").toggleClass("md:w-[35%] md:w-[10%]").animate({ width: "35%" }, 1000);
+                } else {
+                    $(".sidebar").toggleClass("lg:w-[20%] lg:w-[5%]");
+                    // $(".sidebar").toggleClass("lg:w-[20%] lg:w-[5%]").animate({ width: "20%" }, 1000);
+                }
+                $("#ctnLien").toggleClass('space-y-6 space-y-2');
+                $(".content").toggleClass("lg:pl-[22%] lg:pl-[7%]");
+                $(".toggle-btn").toggle(); // Bascule entre les boutons
+            });
+        });
+    </script>
+</body>
+
+</html>
